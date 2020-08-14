@@ -6,9 +6,9 @@
 
             <div class="card grid-item" >
                 <div class="card-body">
-                  <h5 class="card-title"><%= post._title  %> </h5>
-                  <p class="card-text"><%= post._detail.slice(0,50)+"..."  %> </p>
-                  <a href="/post-detail/<%= post._id %> " class="btn btn-primary">Details</a>
+                  <h5 class="card-title"><%= post.title  %> </h5>
+                  <p class="card-text"><%= post.detail.slice(0,50)+"..."  %> </p>
+                  <a href="/post-detail/<%= post.id %> " class="btn btn-primary">Details</a>
                 </div>
              </div>
         

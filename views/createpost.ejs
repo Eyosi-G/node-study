@@ -2,11 +2,11 @@
 <div class="container mt-3">
     <form action=" <%= editmode==true ? '/edit-post': '/post' %> " method="post" >
         <div class="form-group">
-            <input type="text" class="form-control form-control-sm" placeholder="Title" name="title" value="<%= editmode==true ? post._title.trim():""%>">
+            <input type="text" class="form-control form-control-sm" placeholder="Title" name="title" value="<%= editmode==true ? post.title.trim():""%>">
         </div>
        
         <div class="form-group">
-            <textarea class="form-control form-control-sm" name="description" cols="30" rows="5" placeholder="Description"><%= editmode==true ? post._detail.trim():"" %></textarea>
+            <textarea class="form-control form-control-sm" name="description" cols="30" rows="5" placeholder="Description"><%= editmode==true ? post.detail.trim():"" %></textarea>
         </div>
        
         <% if(editmode) {%>

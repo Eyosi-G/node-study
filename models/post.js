@@ -1,44 +1,39 @@
-let posts = [];
+const db = require('../utils/database');
 
 module.exports = class Post{
     constructor(title,detail){
-        this._title = title;
-        this._detail = detail;
+        this.title = title;
+        this.detail = detail;
     }
 
-    saveBlog(){
-        const current = new Date();
-        this._time = current.toLocaleString();
-        this._id = Date.now().toString();
-        posts.push(this);
+    async saveBlog(){
+        await db.insertPost(this);
     }
 
-    static updateBlog(id,title,detail){
+    static async updateBlog(id,title,detail){
         const current = new Date();
         const post = new Post();
         
-        post._id = id;
-        post._detail = detail;
-        post._time = current.toLocaleString();
-        post._title = title;
+        post.id = id;
+        post.detail = detail;
+        post.time = current.toLocaleString();
+        post.title = title;
         
-        for(let i=0;i<posts.length;i++){
-            if(posts[i]._id===id){
-                posts[i] = post;
-                break;
-            }
-        }
+        await db.updatePost(post);
+
     }
-    static getPosts(){
+    static async getPosts(){
+        const posts = await db.getPosts();
         return posts;
     }
 
-    static getPostById(id){
-        return posts.find((val)=>val._id===id);
+    static async getPostById(id){
+       return db.findPostById(id);
     }
 
-    static deleteById(id){
-        posts = posts.filter((val)=>val._id!==id);
+    static async deleteById(id){
+        await db.deleteById(id);
     }
 
+    
 }

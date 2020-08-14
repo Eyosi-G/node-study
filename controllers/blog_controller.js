@@ -1,15 +1,15 @@
 const Post = require('../models/post');
 
-exports.blogPosts = (req,res,next)=>{
-    const posts = Post.getPosts();
+exports.blogPosts = async (req,res,next)=>{
+    const posts = await Post.getPosts();
     res.render('blogposts',{posts:posts});    
 }
 
-exports.createPost = (req,res,next)=>{
+exports.createPost = async (req,res,next)=>{
     const title = req.body.title;
     const description = req.body.description;
     const post = new Post(title,description);
-    post.saveBlog();
+    await post.saveBlog();
     res.redirect('/');
 }
 
@@ -18,9 +18,10 @@ exports.createPostView = (req,res,next)=>{
 
 }
 
-exports.blogPostDetail = (req,res,next)=>{
+exports.blogPostDetail = async(req,res,next)=>{
     const id = req.params.id;
-    const post = Post.getPostById(id);
+    const post = await Post.getPostById(id);
+    
     if(post===undefined){
         res.redirect('/');
     }
@@ -28,25 +29,25 @@ exports.blogPostDetail = (req,res,next)=>{
 
 }
 
-exports.deletePost = (req,res,next)=>{
+exports.deletePost = async(req,res,next)=>{
     const id = req.params.id;
-    Post.deleteById(id);
+    await Post.deleteById(id);
     res.redirect('/')
 
 }
 
-exports.updatePost = (req,res,next)=>{
+exports.updatePost = async(req,res,next)=>{
     const title = req.body.title;
     const description = req.body.description;
     const id = req.body.id;
    
-    Post.updateBlog(id,title,description);
+    await Post.updateBlog(id,title,description);
    
     res.redirect('/');
 }
 
-exports.editPostView = (req,res,next)=>{
+exports.editPostView = async(req,res,next)=>{
     const id = req.params.id;
-    const post = Post.getPostById(id);
+    const post = await Post.getPostById(id);
     res.render('createpost',{editmode:true,post:post});
 }
