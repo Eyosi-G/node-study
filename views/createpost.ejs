@@ -1,0 +1,21 @@
+<%- include('navbar.ejs') %> 
+<div class="container mt-3">
+    <form action=" <%= editmode==true ? '/edit-post': '/post' %> " method="post" >
+        <div class="form-group">
+            <input type="text" class="form-control form-control-sm" placeholder="Title" name="title" value="<%= editmode==true ? post._title.trim():""%>">
+        </div>
+       
+        <div class="form-group">
+            <textarea class="form-control form-control-sm" name="description" cols="30" rows="5" placeholder="Description"><%= editmode==true ? post._detail.trim():"" %></textarea>
+        </div>
+       
+        <% if(editmode) {%>
+            <input type="hidden" name="id" value="<%=post.id %>">
+         <% } %>  
+        
+        <div class="form-group">
+            <input type="submit" value="<%= (editmode==true ? 'Edit Blog': 'Post Blog') %>" class="btn btn-secondary">
+        </div>
+    </form>
+</div>
+<%- include('footer.ejs') %> 

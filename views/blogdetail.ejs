@@ -1,0 +1,14 @@
+<%- include('navbar.ejs') %> 
+<div class="container mt-3 ">
+     <div class="text-right">
+         <a href="/delete-post/<%=post._id %> " class="text-danger mr-3">Delete</a>
+         <a href="/edit-post/<%=post._id %> " class="text-success">Edit</a>
+     </div>
+    <h2 class="mx-auto"><%= post._title %> </h2>
+    <hr>
+    <h6><%= post._time%> </h6>
+    <p class="text-secondary">
+        <%= post._detail %>  
+    </p>
+</div>
+<%- include('footer.ejs') %> 
